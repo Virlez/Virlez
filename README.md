@@ -1,7 +1,4 @@
-# Virlez 👋
-
 **Quality Engineering · QA Automation · Quality Assistance**  
-📍 Toulouse / Blagnac · France · [LinkedIn](https://www.linkedin.com/in/andreivaldir/)
 
 Je suis ingénieur QA Automation, spécialisé dans la conception de stratégies de tests, l'architecture E2E et l'accompagnement des équipes de développement. Mon fil conducteur : **rendre les logiciels plus fiables, et rendre leur qualité vérifiable**.
 
@@ -54,7 +51,3 @@ Prototype de table virtuelle multijoueur avec un backend Rust (Axum/Tokio). Le d
 **Approche qualité** : stratégie par les risques · Quality Assistance · non-régression · revues de code · ADR · coaching  
 **IA & sécurité** : tests fonctionnels IA · prompt injection · outils et agents QA · investigation de vulnérabilités applicatives
 
-## 🤝 Échanger
-
-J'échange volontiers sur l'architecture des tests, le Quality Engineering, les outils QA assistés par IA et l'amélioration des pratiques d'équipe.  
-📨 [Me contacter sur LinkedIn](https://www.linkedin.com/in/andreivaldir/)
