@@ -20,34 +20,40 @@ Extension Chrome/Edge pour enrichir et franciser l'expérience D&D 2024 sur Roll
 
 📖 [Démarche de mutation testing](https://github.com/Virlez/compagnon-dd55-fr/blob/main/docs/MUTATION-TESTING.md) · [Revue de sécurité](https://github.com/Virlez/compagnon-dd55-fr/blob/main/docs/SECURITY-REVIEW-1.4.2.md) · [Chrome Web Store](https://chromewebstore.google.com/detail/compagnon-dd-55-fr/hamfahkbjnljnmcofgefoimhaabmjalb)
 
-### 🎲 [Rollz](https://github.com/Virlez/rollz) — automatisation et résilience web
+### 🎲 [Rollz](https://github.com/Virlez/rollz) — automatisation, mutation testing et résilience web
 
-Lanceur de dés JDR, accessible en **PWA** et utilisé par des joueurs. Application JavaScript, tests Playwright en TypeScript.
+Lanceur de dés JDR accessible en **PWA**, utilisé par des joueurs. Application JavaScript avec un moteur partagé TypeScript et des tests Playwright/Vitest.
 
-- **Tests E2E multi-navigateurs :** configuration Chromium, Firefox et WebKit.
-- **Tests déterministes :** simulation des réponses de RANDOM.ORG pour vérifier des résultats normalement aléatoires.
-- **Résilience :** erreurs réseau, réponses HTTP 503, reprise après incident et bascule vers Web Crypto lorsque l'API est indisponible.
-- **Parcours utilisateur :** calcul des jets, favoris, historique, traduction, responsive et comportements PWA.
-- **Mesure de couverture E2E :** scripts de collecte et de génération de rapports.
+- **Pyramide de tests rééquilibrée :** **157 tests unitaires** et **122 scénarios E2E par navigateur** documentés ; les variantes de calcul ont été déplacées au niveau unitaire lorsque le navigateur n'apportait pas de valeur supplémentaire.
+- **Mutation testing :** Stryker sur **8 fichiers métier** (parseurs, moteurs, aléatoire, limites et orchestration) ; score documenté passé de **17,41 % à 93,96 %** sur **1 522 mutations**. Le score inclut 7 timeouts et ne représente pas toute l'application.
+- **CI :** seuil de mutation **bloquant à 90 %** ; tests unitaires et E2E Chromium sur les PR, puis Chromium/Firefox/WebKit sur `main`, avec rapports et traces.
+- **Déterminisme et résilience :** tirages contrôlés, simulation des réponses de RANDOM.ORG, erreurs HTTP/réseau, reprise et bascule vers Web Crypto.
+- **Parcours utilisateur :** formules, favoris, historique, responsive, localisation et PWA ; scripts de mesure de couverture E2E.
 
-🌐 [Essayer Rollz](https://virlez.github.io/rollz/) · [Voir les tests Playwright](https://github.com/Virlez/rollz/tree/main/tests/e2e)
+*En cours : extension de la couche de tests d'intégration.*
+
+🌐 [Essayer Rollz](https://virlez.github.io/rollz/) · [Stratégie et résultats de mutation](https://github.com/Virlez/rollz/blob/main/docs/MUTATION_TESTING.md) · [Tests E2E](https://github.com/Virlez/rollz/tree/main/tests/e2e)
 
 ### 🧩 [Rusty VTT](https://github.com/Virlez/rusty-vtt) — stratégie QA sur un développement assisté par IA
 
-Prototype de table virtuelle multijoueur avec un backend Rust (Axum/Tokio). Le développement applicatif a été **largement assisté par des agents IA** ; mon rôle principal a été le **pilotage du projet et de sa stratégie de validation**, et non une expertise de développeur Rust.
+Prototype de table virtuelle multijoueur avec backend Rust (Axum/Tokio). Le développement est **largement assisté par des agents IA** ; mon rôle est d'abord le **pilotage du projet et de sa stratégie de validation**, sans revendiquer une expertise de développement Rust.
 
-- **Pyramide de tests :** tests unitaires Rust, cinq suites d'intégration HTTP et E2E Playwright.
-- **Scénarios à risque :** authentification, autorisations, séparation MJ/joueur, persistance et restauration des données.
-- **Tests proches du réel :** vrai serveur Rust, échanges HTTP/SSE, plusieurs contextes utilisateurs et données isolées.
-- **CI :** exécution de la suite sur les pull requests et conservation des diagnostics en cas d'échec.
+- **Tests multicouches :** tests unitaires Rust, **9 propriétés génératives** avec `proptest`, **7 suites d'intégration HTTP** sur le véritable serveur et **11 parcours Playwright sur 3 moteurs** (33 exécutions E2E).
+- **Confidentialité et sécurité :** projections MJ/joueur, contrôle des autorisations, données privées, notifications HTTP/SSE et absence de fuite entre utilisateurs.
+- **Persistance et concurrence :** sauvegardes corrompues, échecs réels d'écriture/renommage, reprise après incident, redémarrages et mutations simultanées sans perte de données.
+- **Résilience réseau :** reconnexion SSE après interruption réelle, rattrapage des événements, conservation de session et protection des messages privés.
+- **Mutation testing Rust :** `cargo-mutants` ciblé sur les règles critiques (authentification, permissions, visibilité, quotas) ; campagne **à déclenchement manuel**, sans score global annoncé.
+- **CI :** tests Rust, HTTP et E2E Chromium/Firefox/WebKit sur les pull requests, avec diagnostics d'échec.
 
-📖 [Stratégie et limites de test](https://github.com/Virlez/rusty-vtt/blob/main/docs/TESTING.md)
+*En cours : enrichissement des scénarios de test.*
+
+📖 [Périmètre, stratégie et limites](https://github.com/Virlez/rusty-vtt/blob/main/docs/TESTING.md) · [Configuration des mutations](https://github.com/Virlez/rusty-vtt/blob/main/.cargo/mutants.toml)
 
 ## 🧰 Outils et pratiques
 
 **Automation & code** : Playwright · TypeScript · C#/.NET · Vitest · Stryker · JavaScript  
 **API & données** : REST · Postman · Bruno · SQL Server / T-SQL  
 **Industrialisation** : Git · Azure Pipelines · GitHub Actions · CI/CD · tests unitaires, d'intégration et E2E  
-**Approche qualité** : stratégie par les risques · Quality Assistance · non-régression · revues de code · ADR · coaching  
+**Approche qualité** : stratégie par les risques · Quality Assistance · mutation testing · property-based testing · non-régression · revues de code · ADR · coaching  
 **IA & sécurité** : tests fonctionnels IA · prompt injection · outils et agents QA · investigation de vulnérabilités applicatives
 
